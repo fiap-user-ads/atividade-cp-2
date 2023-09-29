@@ -14,13 +14,20 @@ def verifica_email(email: str)  -> None:
     parte_1_nome = partes[0]
     parte_2_dominio = partes[1]
 
-    caracteres_especiais = "!@#$%^&*()_+{}[]:;<>,.?~\\|/"
+    if parte_1_nome[0].isnumeric():
+        errado()
+        return
 
+    caracteres_especiais = "!@#$%^&*()_+{}[]:;<>,?~\\|-/"
     for caracter in parte_1_nome:
         if caracter in caracteres_especiais:
             errado()
             return
-
+    for caracter in parte_2_dominio:
+        if caracter in caracteres_especiais:
+            errado()
+            return
+    
     if parte_2_dominio.count(".") < 1 or parte_2_dominio.count(".") > 2:
         errado()
         return
